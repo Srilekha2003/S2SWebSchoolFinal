@@ -19,8 +19,10 @@ class ModulesModel extends Model
         'module_image',
         'description',
         'settings',
+
         'is_system',
         'status',
+
         'last_accessed_by',
     ];
 

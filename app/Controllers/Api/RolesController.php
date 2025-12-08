@@ -22,7 +22,7 @@ class RolesController extends BaseApiController
      */
     public function index()
     {
-        // if ($resp = $this->checkPermission('roles', 'index', true)) return $resp;
+        if ($resp = $this->checkPermission('roles', 'index', true)) return $resp;
 
         try {
             $roles = $this->rolesModel

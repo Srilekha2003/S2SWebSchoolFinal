@@ -15,6 +15,7 @@ class UsersModel extends Model
 
     protected $allowedFields    = [
         'role_id',
+        'village_id',
         'name',
         'email',
         'password',
@@ -47,6 +48,7 @@ class UsersModel extends Model
     // Validation
     protected $validationRules = [
         'role_id'          => 'required|integer',
+        'village_id'       => 'required|integer',
         'name'             => 'required|max_length[150]',
         'email'            => 'required_without[phone]|permit_empty|valid_email|is_unique[users.email,id,{id}]',
         'password'         => 'permit_empty|max_length[255]',

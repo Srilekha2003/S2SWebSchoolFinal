@@ -20,7 +20,7 @@ class CreateRoles extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
                 'unique'     => true,
-                'comment'    => 'Name of the role (e.g., Admin, User)',
+                'comment'    => 'Name of the role (e.g., Admin, User, Villager)',
             ],
             'description' => [
                 'type'    => 'TEXT',
@@ -47,7 +47,6 @@ class CreateRoles extends Migration
                 'null'    => true,
             ],
         ]);
-        
 
         $this->forge->addKey('id', true); // primary key
         $this->forge->addForeignKey('last_accessed_by', 'users', 'id', 'CASCADE', 'SET NULL'); // very first migration created roles commented this line out

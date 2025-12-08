@@ -22,6 +22,13 @@ class CreateUsers extends Migration
                 'unsigned'   => true,
                 'comment'    => 'Foreign key referencing roles.id to assign role to user',
             ],
+            'village_id' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'unsigned'   => true,
+                'null'       => true,
+                'comment'    => 'Optional foreign key referencing villages.id',
+            ],
             'name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '150',
@@ -50,7 +57,7 @@ class CreateUsers extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '50',
                 'null'       => true,
-                'comment'    => 'Authentication code for user',
+                'comment'    => 'Authentication code for villagers',
             ],
             'profile_pic' => [
                 'type'       => 'VARCHAR',
@@ -142,6 +149,7 @@ class CreateUsers extends Migration
 
         // Foreign key constraints
         $this->forge->addForeignKey('role_id', 'roles', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('village_id', 'villages', 'id', 'CASCADE', 'CASCADE');
 
         $this->forge->createTable('users', true, ['ENGINE' => 'InnoDB']);
     }

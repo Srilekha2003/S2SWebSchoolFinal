@@ -19,7 +19,7 @@ class SuperadminSeeder extends Seeder
         }
 
         // 2️⃣ Check if superadmin already exists
-        $existing = $usersBuilder->where('email', 'superadmin@s2swebschool.com')->get()->getRowArray();
+        $existing = $usersBuilder->where('email', 'superadmin@manavillage.com')->get()->getRowArray();
         if ($existing) {
             echo "⚠️ Superadmin user already exists.\n";
             return;
@@ -28,8 +28,9 @@ class SuperadminSeeder extends Seeder
         // 3️⃣ Insert default superadmin user
         $usersBuilder->insert([
             'role_id'          => $superadminRole['id'],
+            'village_id'       => null,
             'name'             => 'S2S Web Solutions',
-            'email'            => 'superadmin@s2swebschool.com',
+            'email'            => 'superadmin@manavillage.com',
             'password'         => password_hash('Super@1234', PASSWORD_BCRYPT),
             'phone'            => null,
             'status'           => 'active',
@@ -49,6 +50,6 @@ class SuperadminSeeder extends Seeder
             'deleted_at'       => null,
         ]);
 
-        echo "✅ Superadmin user created Successfully.\n";
+        echo "✅ Superadmin user created successfully.\n";
     }
 }
