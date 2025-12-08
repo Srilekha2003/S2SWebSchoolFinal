@@ -3,7 +3,6 @@
 namespace App\Controllers\Api;
 
 use App\Models\UsersModel;
-use App\Models\VillagesModel;
 use App\Models\RolesModel;
 use App\Models\ModulePermissionsModel;
 use App\Models\ModulesModel;
@@ -12,7 +11,6 @@ use CodeIgniter\HTTP\IncomingRequest;
 class UsersController extends BaseApiController
 {
     protected UsersModel $usersModel;
-    protected VillagesModel $villagesModel;
     protected ModulesModel $modulesModel;
     protected ModulePermissionsModel $modulePermModel;
 
@@ -25,7 +23,6 @@ class UsersController extends BaseApiController
         helper(['auth', 'api']);
 
         $this->usersModel       = new UsersModel();
-        $this->villagesModel    = new VillagesModel();
         $this->rolesModel       = new RolesModel();
         $this->modulesModel     = new ModulesModel();
         $this->modulePermModel  = new ModulePermissionsModel();
@@ -288,93 +285,6 @@ class UsersController extends BaseApiController
     }
 
     /* ==========================================================================
-        MOBILE USERS
-       ========================================================================== */
-
-    /** Create Mobile User */
-    public function createMobile()
-    {
-        try {
-            $data = $this->input();
-
-            // Validate role
-            if (empty($data['village_id']) || !$this->villagesModel->find($data['village_id'])) {
-                return $this->respondError('Invalid village_id', 422);
-            }
-
-            if (empty($data['name']) || empty($data['phone'])) {
-                return $this->respondError('Name & Phone number required', 422);
-            }
-
-            if ($this->usersModel->where('phone', $data['phone'])->countAllResults() > 0) {
-                return $this->respondError('Phone already exists', 422);
-            }
-
-            $role = $this->rolesModel->where('role_name', 'villager')->first();
-            if (!$role) {
-                return $this->respondError('Villager role not found in database', 500);
-            }
-        
-            $data['role_id'] = $role['id'];
-
-            if (!$this->usersModel->insert($data)) {
-                return $this->respondError('Failed to create user', 422);
-            }
-
-            $user = $this->usersModel->find($this->usersModel->getInsertID());
-
-            return $this->respondSuccess($user, 'Mobile user created', 201);
-
-        } catch (\Throwable $e) {
-            log_message('error', '[UsersController::createMobile] '.$e->getMessage());
-            return $this->respondError('Error creating mobile user'.$e->getMessage(), 500);
-        }
-    }
-
-    /** Login Mobile User */
-    public function loginMobile()
-    {
-        try {
-            $data = $this->input();
-            $phone      = trim($data['phone'] ?? '');
-            $village_id = $data['village_id'] ?? null;
-
-            if (empty($phone) || empty($village_id)) {
-                return $this->respondError('Phone number and village_id are required', 422);
-            }
-
-            if (!$this->villagesModel->find($village_id)) {
-                return $this->respondError('Invalid village_id', 422);
-            }
-
-            $user = $this->usersModel
-                ->select("users.*, roles.role_name")
-                ->join("roles", "roles.id = users.role_id", "left")
-                ->where("users.phone", $phone)
-                ->where("users.village_id", $village_id)
-                ->where("users.deleted_at", null)
-                ->first();
-
-            if (!$user) {
-                return $this->respondError('Invalid credentials', 404);
-            }
-
-            if ($user['is_verified'] !== 'yes') {
-                return $this->respondError(
-                    'Your account is not approved yet. Please wait for admin approval.',403);
-            }
-
-            return $this->respondSuccess([
-                'user'  => $user
-            ], 'Login successful');
-
-        } catch (\Throwable $e) {
-            log_message('error', '[UsersController::loginMobile] '.$e->getMessage());
-            return $this->respondError('Error during mobile login', 500);
-        }
-    }
-
-    /* ==========================================================================
         TOKEN MANAGEMENT (JWT)
        ========================================================================== */
 
@@ -478,7 +388,7 @@ class UsersController extends BaseApiController
                 return $this->respondError('Account is inactive', 403);
             }
 
-            // If user is villager, they need approval
+            // If user is , they need approval
             if (isset($user['is_verified']) && $user['is_verified'] !== 'yes') {
                 return $this->respondError('Account is not verified by admin', 403);
             }

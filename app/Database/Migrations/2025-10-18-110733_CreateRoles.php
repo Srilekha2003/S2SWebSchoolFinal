@@ -20,7 +20,7 @@ class CreateRoles extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
                 'unique'     => true,
-                'comment'    => 'Name of the role (e.g., Admin, User, Villager)',
+                'comment'    => 'Name of the role (e.g., Admin, User)',
             ],
             'description' => [
                 'type'    => 'TEXT',
