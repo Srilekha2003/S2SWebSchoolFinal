@@ -49,6 +49,6 @@ class SuperadminSeeder extends Seeder
             'deleted_at'       => null,
         ]);
 
-        echo "✅ Superadmin user created successfully.\n";
+        echo "✅ Superadmin user created Successfully.\n";
     }
 }

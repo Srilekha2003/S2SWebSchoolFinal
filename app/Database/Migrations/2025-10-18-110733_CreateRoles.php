@@ -47,6 +47,7 @@ class CreateRoles extends Migration
                 'null'    => true,
             ],
         ]);
+        
 
         $this->forge->addKey('id', true); // primary key
         $this->forge->addForeignKey('last_accessed_by', 'users', 'id', 'CASCADE', 'SET NULL'); // very first migration created roles commented this line out

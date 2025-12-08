@@ -17,8 +17,8 @@ $routes->get('/', 'Home::index');
 $routes->group('api/v1', ['namespace' => 'App\Controllers\Api'], function ($routes) {
 
     // Mobile User APIs (Public)
-    $routes->post('mobile/register', 'UsersController::createMobile');
-    $routes->post('mobile/login', 'UsersController::loginMobile');
+    // $routes->post('mobile/register', 'UsersController::createMobile');
+    // $routes->post('mobile/login', 'UsersController::loginMobile');
 
     // Token Generated (requires valid credentials)
     $routes->post('token/generate', 'UsersController::generateToken');
@@ -37,6 +37,7 @@ $routes->group('api/v1', ['namespace' => 'App\Controllers\Api'], function ($rout
         'module-permissions'    => 'ModulePermissionsController',
         'roles'                 => 'RolesController',
         'users'                 => 'UsersController',
+        'schools'                 => 'SchoolsController',
       
     ];
 
