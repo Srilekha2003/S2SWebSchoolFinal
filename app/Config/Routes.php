@@ -32,6 +32,28 @@ $routes->group('api/v1', ['namespace' => 'App\Controllers\Api'], function ($rout
         'module-permissions'    => 'ModulePermissionsController',
         'roles'                 => 'RolesController',
         'users'                 => 'UsersController',
+        'schools'               => 'SchoolsController',
+        'branches'              => 'BranchesController',
+        'faculty'               => 'FacultyController',
+        'classes'               => 'ClassesController',
+        'students'              => 'StudentsController',
+        'timetable'             => 'TimetableController',
+        'attendance'            => 'AttendanceController',
+        'exam'                  => 'ExamController',
+        'exam_scores'           => 'ExamScoreController',
+        'progress_cards'        => 'ProgressCardController',
+        'subjects'              => 'SubjectController',
+        'assignments_homework'  => 'AssignmentsHomeworkController',
+        'notifications'         => 'NotificationsController',
+        'cultural_activities'   => 'CulturalActivitiesController',
+        'fee_management'        => 'FeeManagementController',
+        'library_books'        => 'LibraryBooksController',
+        'hostel_rooms'        => 'HostelRoomsController',
+        'hostel_allocations'        => 'HostelAllocationsController',
+        'library_book_issue'        => 'LibraryBookIssueController',
+        'transport'                  => 'TransportController',
+        'medical_records'                  => 'MedicalRecordsController',
+
     ];
 
     foreach ($publicControllers as $route => $controller) {
