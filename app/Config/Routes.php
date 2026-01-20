@@ -49,10 +49,16 @@ $routes->group('api/v1', ['namespace' => 'App\Controllers\Api'], function ($rout
         'fee_management'        => 'FeeManagementController',
         'library_books'        => 'LibraryBooksController',
         'hostel_rooms'        => 'HostelRoomsController',
-        'hostel_allocations'        => 'HostelAllocationsController',
-        'library_book_issue'        => 'LibraryBookIssueController',
-        'transport'                  => 'TransportController',
-        'medical_records'                  => 'MedicalRecordsController',
+        'hostel_allocations'       => 'HostelAllocationsController',
+        'library_book_issue'       => 'LibraryBookIssueController',
+        'transport'                => 'TransportController',
+        'medical_records'          => 'MedicalRecordsController',
+        'gallery'                  => 'GalleryController',
+        'student_leave_management'         => 'StudentLeaveManagementController',
+        'faculty_leave_management'         => 'FacultyLeaveManagementController',
+        'faculty_salary'         => 'FacultySalaryController',
+        'school_calendar'         => 'SchoolCalendarController',
+        'discipline_performance'         => 'DisciplinePerformanceController',
 
     ];
 
